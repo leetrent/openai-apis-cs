@@ -1,6 +1,10 @@
 import openai
+import json
 from dotenv import dotenv_values
 from IPython.display import Markdown, display
+
+def display_colors(colors):
+    display(Markdown(" ".join(f"<span style='color: {color}'>{chr(9608) * 4}</span>" for color in colors)))  
 
 config = dotenv_values(".env")
 openai.api_key = config["OPENAI_API_KEY"]
@@ -29,10 +33,6 @@ openAiResponse = openai.Completion.create(
     prompt=instructions,
     max_tokens=200
 )
-print(openAiResponse["choices"][0]["text"])
-
-
-def display_color(colors):
-    display(Markdown(" ".join(f"<span style='color: {color}'>{chr(9608) * 4}</span>" for color in colors)))   
-
-display_color(["#FF7C4C", "#FCBF49", "#F9EF50", "#F6F45F", "#82C5FF"])
+colors = json.loads(openAiResponse["choices"][0]["text"])
+print(colors)
+display_colors(colors)
