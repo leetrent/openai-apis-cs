@@ -9,3 +9,9 @@ $ pip install Flask
 # Run Flask:
 $ flask run
 $ flask run --debug
+
+# Install openai
+$ pip install openai
+
+# Install python_dotenv
+$ pip install python_dotenv
